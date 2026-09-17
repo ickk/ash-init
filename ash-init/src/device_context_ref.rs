@@ -1,3 +1,5 @@
+// © ickk 2023-2026, All Rights Reserved.
+
 use {
   crate::{DeviceContext, Image, Queue, Result, ShaderModule, VkContext},
   ::ash::{ext, vk, Device},

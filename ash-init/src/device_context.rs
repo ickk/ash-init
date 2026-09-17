@@ -1,3 +1,5 @@
+// © ickk 2023-2026, All Rights Reserved.
+
 use {
   crate::{
     debug::Object, DeviceRequirements, ErrorList, Queue, Result, VkContext,

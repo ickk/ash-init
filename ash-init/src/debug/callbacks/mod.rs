@@ -1,3 +1,5 @@
+// © ickk 2023-2026, All Rights Reserved.
+
 //! Sample [`DebugCallback`][crate::debug::DebugCallback] implementations
 
 pub(crate) mod blackhole_debug_callback;

@@ -1,5 +1,8 @@
+# © ickk 2023-2026, All Rights Reserved.
+
 [package]
 name = "ash-init"
+authors = ["ickk <crates@ickk.io>"]
 version = "0.0.0"
 edition = "2021"
 description = "Vulkan Instance & Device bootstrapping"

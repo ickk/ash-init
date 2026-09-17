@@ -1,3 +1,5 @@
+// © ickk 2023-2026, All Rights Reserved.
+
 use ::ash::vk;
 
 #[derive(PartialEq, Clone, Debug)]

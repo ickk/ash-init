@@ -1,5 +1,7 @@
+# © ickk 2023-2026, All Rights Reserved.
+
 [workspace]
-resolver = "2"
+resolver = "3"
 members = ["ash-init"]
 
 [workspace.dependencies]

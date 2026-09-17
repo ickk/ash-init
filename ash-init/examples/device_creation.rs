@@ -9,7 +9,7 @@ use ::ash_init::{
 
 const APP_NAME: &str = file!();
 const APP_VERSION: Version = Version::new(0, 0, 0);
-const RENDERER_NAME: &str = "toil/engine/vk_context";
+const RENDERER_NAME: &str = file!();
 const RENDERER_VERSION: Version = Version::new(0, 0, 0);
 
 fn main() {

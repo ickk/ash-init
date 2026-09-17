@@ -1,3 +1,5 @@
+// © ickk 2023-2026, All Rights Reserved.
+
 use {
   crate::{
     debug::{debug_callback::debug_callback_ffi, DebugCallback},

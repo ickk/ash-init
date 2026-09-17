@@ -1,3 +1,5 @@
+// © ickk 2023-2026, All Rights Reserved.
+
 pub mod debug;
 mod device_requirements;
 mod error;

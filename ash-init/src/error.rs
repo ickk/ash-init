@@ -1,3 +1,5 @@
+// © ickk 2023-2026, All Rights Reserved.
+
 /// Simple [`::core::result::Result`] type with error variant being a
 /// `Box<dyn Error>`
 pub type Error = Box<dyn ::std::error::Error>;

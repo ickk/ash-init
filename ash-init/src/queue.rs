@@ -1,3 +1,5 @@
+// © ickk 2023-2026, All Rights Reserved.
+
 use {crate::queue_requirements::QueueCapabilities, ::ash::vk};
 
 #[derive(Clone, Debug)]

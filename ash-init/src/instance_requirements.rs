@@ -1,3 +1,5 @@
+// © ickk 2023-2026, All Rights Reserved.
+
 use crate::{macros::make_extensions, Version};
 
 pub struct InstanceRequirements {

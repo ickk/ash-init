@@ -1,3 +1,5 @@
+// © ickk 2023-2026, All Rights Reserved.
+
 use {crate::PresentSupport, ::ash::vk};
 
 #[derive(Clone, Debug)]
@@ -9,16 +11,16 @@ pub struct QueueRequirements<'name> {
 }
 
 impl<'name> QueueRequirements<'name> {
-  pub const DEFAULT: Self = Self {
+  pub const NONE: Self = Self {
     names: Vec::new(),
     priorities: Vec::new(),
-    capabilities: QueueCapabilities::DEFAULT,
+    capabilities: QueueCapabilities::NONE,
     present_support: None,
   };
 
   #[inline]
   pub fn new() -> Self {
-    Self::DEFAULT
+    Self::NONE
   }
 
   #[inline]
@@ -53,7 +55,7 @@ impl<'name> QueueRequirements<'name> {
 impl Default for QueueRequirements<'_> {
   #[inline]
   fn default() -> Self {
-    Self::DEFAULT
+    Self::NONE
   }
 }
 
@@ -118,7 +120,7 @@ impl From<vk::QueueFlags> for QueueCapabilities {
 use crate::macros::delegate_builder_setters;
 
 impl QueueCapabilities {
-  pub const DEFAULT: Self = Self {
+  pub const NONE: Self = Self {
     graphics: false,
     compute: false,
     transfer: false,
@@ -131,7 +133,7 @@ impl QueueCapabilities {
 
   #[inline]
   pub fn new() -> Self {
-    Self::DEFAULT
+    Self::NONE
   }
 
   delegate_builder_setters! {
@@ -151,6 +153,6 @@ impl QueueCapabilities {
 impl Default for QueueCapabilities {
   #[inline]
   fn default() -> Self {
-    Self::DEFAULT
+    Self::NONE
   }
 }

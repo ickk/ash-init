@@ -1,3 +1,5 @@
+// © ickk 2023-2026, All Rights Reserved.
+
 macro_rules! delegate_builder_setters {
   // variant with 0 level of nesting
   (

@@ -1,3 +1,5 @@
+// © ickk 2023-2026, All Rights Reserved.
+
 use {
   crate::{DeviceContext, DeviceContextRef, Surface, VkContext},
   ::ash::{vk, Device},
