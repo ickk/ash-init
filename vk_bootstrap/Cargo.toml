@@ -1,0 +1,27 @@
+[package]
+name = "vk_bootstrap"
+version = "0.0.0"
+edition = "2021"
+description = "Vulkan Instance & Device bootstrapping"
+publish = false
+
+[dependencies]
+# foreign
+ash = { workspace = true, features = ["loaded", "debug"] }
+raw-window-handle = { workspace = true, features = ["std"] }
+tinyvec = { workspace = true, features = ["alloc"] }
+
+# optional
+log = { workspace = true, optional = true }
+tracing = { workspace = true, optional = true }
+itertools = { workspace = true, optional = true }
+
+[features]
+default = ["tracing"]
+# enables `LogDebugCallback` impl
+log = ["dep:log", "dep:itertools"]
+# enables `TracingDebugCallback` impl
+tracing = ["dep:tracing"]
+
+[lints]
+workspace = true

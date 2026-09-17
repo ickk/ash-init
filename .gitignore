@@ -1,0 +1,9 @@
+# rust
+target/
+
+# rustgpu
+rust-gpu/
+shaders/rust-toolchain.toml
+
+# renderdoc captures
+*.cap
