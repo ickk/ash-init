@@ -1,10 +1,14 @@
-use {crate::debug::*, ::ash::vk};
+use {
+  crate::debug::{CallbackData, DebugCallback},
+  ::ash::vk,
+};
 
 /// A [`DebugCallback`] impl that listens for all message types & severities
 /// but does nothing with the messages received.
 pub struct BlackholeDebugCallback;
 
 impl BlackholeDebugCallback {
+  #[expect(clippy::new_ret_no_self)]
   pub fn new() -> Box<dyn DebugCallback> {
     Box::new(BlackholeDebugCallback {})
   }

@@ -18,6 +18,7 @@ impl TracingDebugCallback {
   /// You can use [`MessageSeverityFlags`][crate::debug::MessageSeverityFlags]
   /// and [`MessageTypeFlags`][crate::debug::MessageTypeFlags] to populate
   /// these arguments instead of `vk::DebugUtilsMessage*FlagsEXT`.
+  #[expect(clippy::new_ret_no_self)]
   pub fn new(
     message_severities: impl Into<vk::DebugUtilsMessageSeverityFlagsEXT>,
     message_types: impl Into<vk::DebugUtilsMessageTypeFlagsEXT>,
