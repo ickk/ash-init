@@ -1,4 +1,4 @@
-use {crate::QueueCapabilities, ::ash::vk};
+use {crate::queue_requirements::QueueCapabilities, ::ash::vk};
 
 #[derive(Clone, Debug)]
 pub struct Queue {
