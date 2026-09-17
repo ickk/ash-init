@@ -1,8 +1,6 @@
 use {
-  crate::{DeviceContext, VkContext},
+  crate::{DeviceContext, Result, VkContext},
   ::ash::vk,
-  crate::Result,
-  ::tinyvec::TinyVec,
 };
 
 #[derive(Clone, Debug)]
@@ -11,7 +9,7 @@ pub struct Image {
   pub(crate) memory: vk::DeviceMemory,
   pub(crate) extent2d: vk::Extent2D,
   pub(crate) aspect: vk::ImageAspectFlags,
-  pub(crate) image_views: TinyVec<[(vk::Format, vk::ImageView); 2]>,
+  pub(crate) image_views: Vec<(vk::Format, vk::ImageView)>,
 }
 
 impl Image {
@@ -136,7 +134,7 @@ where
         aspect_mask: aspect,
       });
 
-    let mut image_views = TinyVec::new();
+    let mut image_views = Vec::new();
     image_views.push((format, unsafe {
       self.device.create_image_view(&image_view_create_info, None)
     }?));

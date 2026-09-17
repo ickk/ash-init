@@ -1,6 +1,7 @@
 use {
-  crate::{debug::Object, DeviceRequirements, Queue, VkContext},
-  crate::{ErrorList, Result},
+  crate::{
+    debug::Object, DeviceRequirements, ErrorList, Queue, Result, VkContext,
+  },
   ::ash::{ext, vk, Device, Instance},
   ::core::fmt,
 };

@@ -1,10 +1,9 @@
 use {
-  crate::{DeviceContext, DeviceContextRef, VkContext},
-  ::ash::{khr, vk, Device},
-  crate::{Platform, Result},
-  crate::raw_window_handle::{
-    HasDisplayAndWindowHandle, WindowHandlePlatform,
+  crate::{
+    raw_window_handle::{HasDisplayAndWindowHandle, WindowHandlePlatform},
+    DeviceContext, DeviceContextRef, Platform, Result, VkContext,
   },
+  ::ash::{khr, vk, Device},
   ::raw_window_handle::{RawWindowHandle, WindowHandle},
 };
 
@@ -31,7 +30,7 @@ impl<'w, D: DeviceContextRef> Surface<'w, D> {
     self.device_context().device()
   }
   #[inline]
-  pub fn window_handle(&self) -> WindowHandle {
+  pub fn window_handle(&self) -> WindowHandle<'_> {
     self.window_handle
   }
   #[inline]

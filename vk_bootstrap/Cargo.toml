@@ -6,20 +6,16 @@ description = "Vulkan Instance & Device bootstrapping"
 publish = false
 
 [dependencies]
-# foreign
 ash = { workspace = true, features = ["loaded", "debug"] }
 raw-window-handle = { workspace = true, features = ["std"] }
-tinyvec = { workspace = true, features = ["alloc"] }
-
-# optional
-log = { workspace = true, optional = true }
 tracing = { workspace = true, optional = true }
-itertools = { workspace = true, optional = true }
+xcb = { workspace = true, optional = true }
+x11 = { workspace = true, optional = true }
 
 [features]
 default = ["tracing"]
-# enables `LogDebugCallback` impl
-log = ["dep:log", "dep:itertools"]
+xcb = ["dep:xcb"]
+xlib = ["dep:x11", "x11/xlib"]
 # enables `TracingDebugCallback` impl
 tracing = ["dep:tracing"]
 

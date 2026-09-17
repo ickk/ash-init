@@ -2,12 +2,10 @@ use {
   crate::{
     debug::{debug_callback::debug_callback_ffi, DebugCallback},
     macros::delegate,
-    DeviceRequirements, Features, InstanceRequirements, Queue,
-    QueueRequirements,
+    DeviceRequirements, Features, InstanceRequirements, PresentSupport, Queue,
+    QueueRequirements, Version, VersionToVk as _,
   },
   ::ash::{ext, khr, prelude::VkResult, vk, Device, Entry, Instance},
-  crate::{PresentSupport, Version},
-  crate::VersionToVk as _,
   ::std::{
     collections::HashSet,
     ffi::{c_void, CStr, CString},
@@ -338,11 +336,11 @@ impl VkContext {
 
   // find each of the queues in queue_requirements and generate the respective
   // `vk::DeviceQueueCreateInfo`s
-  fn get_queue_create_infos<'q>(
-    &'q self,
+  fn get_queue_create_infos<'r>(
+    &self,
     physical_device: vk::PhysicalDevice,
-    queue_requirements: &'q [QueueRequirements],
-  ) -> Result<Vec<vk::DeviceQueueCreateInfo>, Box<str>> {
+    queue_requirements: &'r[QueueRequirements],
+  ) -> Result<Vec<vk::DeviceQueueCreateInfo<'r>>, Box<str>> {
     for requirements in queue_requirements {
       if requirements.names.len() != requirements.priorities.len() {
         return Err(

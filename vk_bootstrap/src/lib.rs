@@ -34,7 +34,7 @@ pub use {
     image::Image,
     instance_requirements::{InstanceExtensions, InstanceRequirements},
     platform::Platform,
-    present_support::PresentSupport,
+    present_support::{PresentSupport, PresentSupportFromRawWindowHandle},
     queue::Queue,
     shader_module::ShaderModule,
     surface::Surface,

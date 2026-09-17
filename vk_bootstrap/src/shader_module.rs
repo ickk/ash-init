@@ -1,7 +1,6 @@
 use {
-  crate::{DeviceContext, VkContext},
+  crate::{DeviceContext, Result, VkContext},
   ::ash::vk,
-  crate::Result,
 };
 
 pub struct ShaderModule {

@@ -1,7 +1,6 @@
 use {
-  crate::{DeviceContext, Image, Queue, ShaderModule, VkContext},
+  crate::{DeviceContext, Image, Queue, Result, ShaderModule, VkContext},
   ::ash::{ext, vk, Device},
-  crate::Result,
 };
 
 pub trait DeviceContextRef {

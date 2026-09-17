@@ -70,7 +70,7 @@ impl<'cb> CallbackData<'cb> {
       .unwrap()
   }
   #[inline]
-  pub fn queue_labels(&self) -> &[DebugLabel] {
+  pub fn queue_labels(&self) -> &[DebugLabel<'_>] {
     if !self.0.p_queue_labels.is_null() {
       // safety:
       // - `DebugLabel` is a transparent wrapper of `vk::DebugUtilsLabelExt`
@@ -88,7 +88,7 @@ impl<'cb> CallbackData<'cb> {
     }
   }
   #[inline]
-  pub fn command_buffer_labels(&self) -> &[DebugLabel] {
+  pub fn command_buffer_labels(&self) -> &[DebugLabel<'_>] {
     if !self.0.p_cmd_buf_labels.is_null() {
       // safety:
       // - `DebugLabel` is a transparent wrapper of `vk::DebugUtilsLabelExt`
@@ -106,7 +106,7 @@ impl<'cb> CallbackData<'cb> {
     }
   }
   #[inline]
-  pub fn objects(&self) -> &[DebugObjectNameInfo] {
+  pub fn objects(&self) -> &[DebugObjectNameInfo<'_>] {
     if !self.0.p_objects.is_null() {
       // safety:
       // - `DebugObjectNameInfo` is a transparent wrapper of
@@ -126,7 +126,7 @@ impl<'cb> CallbackData<'cb> {
     }
   }
   #[inline]
-  pub fn as_raw(&self) -> &vk::DebugUtilsMessengerCallbackDataEXT {
+  pub fn as_raw(&self) -> &vk::DebugUtilsMessengerCallbackDataEXT<'_> {
     self.0
   }
 }
@@ -143,7 +143,7 @@ impl<'cb> DebugLabel<'cb> {
     &self.0.color
   }
   #[inline]
-  pub fn as_raw(&self) -> &vk::DebugUtilsLabelEXT {
+  pub fn as_raw(&self) -> &vk::DebugUtilsLabelEXT<'_> {
     &self.0
   }
 }
@@ -176,7 +176,7 @@ impl<'cb> DebugObjectNameInfo<'cb> {
     )
   }
   #[inline]
-  pub fn as_raw(&self) -> &vk::DebugUtilsObjectNameInfoEXT {
+  pub fn as_raw(&self) -> &vk::DebugUtilsObjectNameInfoEXT<'_> {
     &self.0
   }
 }
@@ -226,7 +226,7 @@ pub(crate) unsafe extern "system" fn debug_callback_ffi(
     CallbackData(callback_data),
   );
 
-  Box::into_raw(user_data);
+  _ = Box::into_raw(user_data);
 
   vk::FALSE
 }

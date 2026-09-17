@@ -1,4 +1,4 @@
-use {::ash::vk, crate::PresentSupport};
+use {crate::PresentSupport, ::ash::vk};
 
 #[derive(Clone, Debug)]
 pub struct QueueRequirements<'name> {

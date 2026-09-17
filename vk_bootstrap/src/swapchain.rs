@@ -1,7 +1,6 @@
 use {
-  crate::Result,
   crate::{
-    DeviceContext, DeviceContextRef, Queue, Surface, SurfaceRef,
+    DeviceContext, DeviceContextRef, Queue, Result, Surface, SurfaceRef,
     SwapchainFrame,
   },
   ::ash::{khr, vk, Device},
@@ -61,7 +60,7 @@ impl<S: SurfaceRef> Swapchain<S> {
     self.extent
   }
   #[inline]
-  pub fn surface(&self) -> &Surface<<S as SurfaceRef>::D> {
+  pub fn surface(&self) -> &Surface<'_, <S as SurfaceRef>::D> {
     self.surface.as_ref()
   }
   #[inline]

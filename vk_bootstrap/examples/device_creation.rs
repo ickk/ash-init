@@ -1,12 +1,10 @@
-use {
-  ::vk_bootstrap::{PresentSupport, Version,
-    debug::{
-      callbacks::TracingDebugCallback,
-      MessageSeverityFlags, MessageTypeFlags,
-    },
-    DeviceExtensions, DeviceRequirements, Features, InstanceExtensions,
-    InstanceRequirements, QueueCapabilities, QueueRequirements, VkContext,
+use ::vk_bootstrap::{
+  debug::{
+    callbacks::TracingDebugCallback, MessageSeverityFlags, MessageTypeFlags,
   },
+  DeviceExtensions, DeviceRequirements, Features, InstanceExtensions,
+  InstanceRequirements, PresentSupport, QueueCapabilities, QueueRequirements,
+  Version, VkContext,
 };
 
 const APP_NAME: &str = file!();
@@ -28,17 +26,15 @@ fn main() {
         ..InstanceExtensions::default()
       },
     },
-    vec![
-      TracingDebugCallback::new(
-        MessageSeverityFlags {
-          verbose: false,
-          info: true,
-          warning: true,
-          error: true,
-        },
-        MessageTypeFlags::ALL,
-      ),
-    ],
+    vec![TracingDebugCallback::new(
+      MessageSeverityFlags {
+        verbose: false,
+        info: true,
+        warning: true,
+        error: true,
+      },
+      MessageTypeFlags::ALL,
+    )],
   )
   .unwrap();
 

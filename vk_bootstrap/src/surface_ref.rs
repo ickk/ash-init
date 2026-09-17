@@ -6,7 +6,7 @@ use {
 
 pub trait SurfaceRef {
   type D: DeviceContextRef;
-  fn as_ref(&self) -> &Surface<Self::D>;
+  fn as_ref(&self) -> &Surface<'_, Self::D>;
 
   fn vk_context(&self) -> &VkContext {
     self.as_ref().vk_context()
@@ -19,7 +19,7 @@ pub trait SurfaceRef {
   fn device(&self) -> &Device {
     self.as_ref().device()
   }
-  fn window_handle(&self) -> WindowHandle {
+  fn window_handle(&self) -> WindowHandle<'_> {
     self.as_ref().window_handle()
   }
   fn handle(&self) -> vk::SurfaceKHR {
@@ -32,7 +32,7 @@ where
   D: DeviceContextRef,
 {
   type D = D;
-  fn as_ref(&self) -> &Surface<D> {
+  fn as_ref(&self) -> &Surface<'_, D> {
     self
   }
 }
@@ -41,7 +41,7 @@ where
   D: DeviceContextRef,
 {
   type D = D;
-  fn as_ref(&self) -> &Surface<D> {
+  fn as_ref(&self) -> &Surface<'_, D> {
     self
   }
 }
@@ -50,7 +50,7 @@ where
   D: DeviceContextRef,
 {
   type D = D;
-  fn as_ref(&self) -> &Surface<D> {
+  fn as_ref(&self) -> &Surface<'_, D> {
     self
   }
 }
@@ -59,7 +59,7 @@ where
   D: DeviceContextRef,
 {
   type D = D;
-  fn as_ref(&self) -> &Surface<D> {
+  fn as_ref(&self) -> &Surface<'_, D> {
     self
   }
 }
@@ -68,7 +68,7 @@ where
   D: DeviceContextRef,
 {
   type D = D;
-  fn as_ref(&self) -> &Surface<D> {
+  fn as_ref(&self) -> &Surface<'_,D> {
     self
   }
 }
@@ -77,7 +77,7 @@ where
   D: DeviceContextRef,
 {
   type D = D;
-  fn as_ref(&self) -> &Surface<D> {
+  fn as_ref(&self) -> &Surface<'_, D> {
     self
   }
 }

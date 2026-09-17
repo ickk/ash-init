@@ -55,28 +55,28 @@ macro_rules! make_features {
         }
       }
 
-      pub(crate) fn features11(&self) -> vk::PhysicalDeviceVulkan11Features {
+      pub(crate) fn features11(&self) -> vk::PhysicalDeviceVulkan11Features<'_> {
         vk::PhysicalDeviceVulkan11Features {
           $($field_11: self.$field_11 as u32,)*
           ..vk::PhysicalDeviceVulkan11Features::default()
         }
       }
 
-      pub(crate) fn features12(&self) -> vk::PhysicalDeviceVulkan12Features {
+      pub(crate) fn features12(&self) -> vk::PhysicalDeviceVulkan12Features<'_> {
         vk::PhysicalDeviceVulkan12Features {
           $($field_12: self.$field_12 as u32,)*
           ..vk::PhysicalDeviceVulkan12Features::default()
         }
       }
 
-      pub(crate) fn features13(&self) -> vk::PhysicalDeviceVulkan13Features {
+      pub(crate) fn features13(&self) -> vk::PhysicalDeviceVulkan13Features<'_> {
         vk::PhysicalDeviceVulkan13Features {
           $($field_13: self.$field_13 as u32,)*
           ..vk::PhysicalDeviceVulkan13Features::default()
         }
       }
 
-      pub(crate) fn khr_fragment_shader_barycentric(&self) -> vk::PhysicalDeviceFragmentShaderBarycentricFeaturesKHR {
+      pub(crate) fn khr_fragment_shader_barycentric(&self) -> vk::PhysicalDeviceFragmentShaderBarycentricFeaturesKHR<'_> {
         vk::PhysicalDeviceFragmentShaderBarycentricFeaturesKHR {
           $($field_khr_fragment_shader_barycentric:
             self.$field_khr_fragment_shader_barycentric as u32,)*
