@@ -68,7 +68,7 @@ where
   D: DeviceContextRef,
 {
   type D = D;
-  fn as_ref(&self) -> &Surface<'_,D> {
+  fn as_ref(&self) -> &Surface<'_, D> {
     self
   }
 }

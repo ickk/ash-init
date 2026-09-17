@@ -3,7 +3,7 @@ use {
     debug::{debug_callback::debug_callback_ffi, DebugCallback},
     macros::delegate,
     DeviceRequirements, Features, InstanceRequirements, PresentSupport, Queue,
-    QueueRequirements, Version, VersionToVk as _,
+    QueueRequirements, Version,
   },
   ::ash::{ext, khr, prelude::VkResult, vk, Device, Entry, Instance},
   ::std::{
@@ -339,7 +339,7 @@ impl VkContext {
   fn get_queue_create_infos<'r>(
     &self,
     physical_device: vk::PhysicalDevice,
-    queue_requirements: &'r[QueueRequirements],
+    queue_requirements: &'r [QueueRequirements],
   ) -> Result<Vec<vk::DeviceQueueCreateInfo<'r>>, Box<str>> {
     for requirements in queue_requirements {
       if requirements.names.len() != requirements.priorities.len() {
@@ -369,7 +369,7 @@ impl VkContext {
           {
             // check for presentation support
             match queue_requirements.present_support {
-              PresentSupport::None => {
+              None => {
                 queue_create_infos.push(
                   vk::DeviceQueueCreateInfo::default()
                     .queue_family_index(i as u32)
@@ -378,7 +378,7 @@ impl VkContext {
                 index = Some(i);
                 break;
               },
-              PresentSupport::Win32 => {
+              Some(PresentSupport::Win32) => {
                 let khr_win32_surface_fns = khr::win32_surface::Instance::new(
                   &self.entry,
                   &self.instance,
@@ -399,10 +399,10 @@ impl VkContext {
                   break;
                 }
               },
-              PresentSupport::Xcb {
+              Some(PresentSupport::Xcb {
                 mut connection,
                 visual_id,
-              } => {
+              }) => {
                 let khr_xcb_surface_fns =
                   khr::xcb_surface::Instance::new(&self.entry, &self.instance);
                 if unsafe {
@@ -423,10 +423,10 @@ impl VkContext {
                   break;
                 }
               },
-              PresentSupport::Xlib {
+              Some(PresentSupport::Xlib {
                 mut display,
                 visual_id,
-              } => {
+              }) => {
                 let khr_xlib_surface_fns = khr::xlib_surface::Instance::new(
                   &self.entry,
                   &self.instance,
@@ -450,7 +450,7 @@ impl VkContext {
                   break;
                 }
               },
-              _ => unimplemented!(),
+              // _ => unimplemented!(),
             }
           }
         }

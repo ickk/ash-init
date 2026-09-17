@@ -5,7 +5,7 @@ pub struct QueueRequirements<'name> {
   pub names: Vec<&'name str>,
   pub priorities: Vec<f32>,
   pub capabilities: QueueCapabilities,
-  pub present_support: PresentSupport,
+  pub present_support: Option<PresentSupport>,
 }
 
 impl<'name> QueueRequirements<'name> {
@@ -13,7 +13,7 @@ impl<'name> QueueRequirements<'name> {
     names: Vec::new(),
     priorities: Vec::new(),
     capabilities: QueueCapabilities::DEFAULT,
-    present_support: PresentSupport::None,
+    present_support: None,
   };
 
   #[inline]
@@ -43,7 +43,7 @@ impl<'name> QueueRequirements<'name> {
   #[inline]
   pub fn present_support(
     mut self,
-    presentation_support: PresentSupport,
+    presentation_support: Option<PresentSupport>,
   ) -> Self {
     self.present_support = presentation_support;
     self

@@ -1,6 +1,6 @@
 use {
   crate::{
-    raw_window_handle::{HasDisplayAndWindowHandle, WindowHandlePlatform},
+    present_support::{HasDisplayHandleExt, HasWindowHandleExt},
     DeviceContext, DeviceContextRef, Platform, Result, VkContext,
   },
   ::ash::{khr, vk, Device},
@@ -49,7 +49,7 @@ impl<'w, D: DeviceContextRef> Surface<'w, D> {
   // TODO add cfg for cargo-features enabling platforms
   pub fn new(
     device_context: D,
-    window: &'w impl HasDisplayAndWindowHandle,
+    window: &'w impl HasWindowHandleExt,
   ) -> Result<Surface<'w, D>> {
     let window_handle = window
       .window_handle()
@@ -59,7 +59,7 @@ impl<'w, D: DeviceContextRef> Surface<'w, D> {
       .display_handle()
       .map_err(|_| "display handle not available or unsupported")?;
 
-    let platform = window_handle.platform()?;
+    let platform = display_handle.platform()?;
 
     let khr_surface_fns = khr::surface::Instance::new(
       device_context.vk_context().entry(),

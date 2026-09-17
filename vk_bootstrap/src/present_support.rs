@@ -1,22 +1,83 @@
 use {
-  crate::{
-    error::Result, platform::Platform,
-    raw_window_handle::{HasDisplayAndWindowHandle, DisplayHandlePlatform},
-  },
+  crate::error::Result,
   ::core::{
     ffi::{c_ulong, c_void},
     ptr::NonNull,
   },
   ::raw_window_handle::{
-    HasDisplayHandle, RawDisplayHandle, RawWindowHandle, XcbDisplayHandle,
-    XcbWindowHandle, XlibDisplayHandle, XlibWindowHandle,
+    HasDisplayHandle, HasWindowHandle, RawDisplayHandle, RawWindowHandle,
+    XcbDisplayHandle, XcbWindowHandle, XlibDisplayHandle, XlibWindowHandle,
   },
 };
 
-#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Platform {
+  Win32,
+  Xcb,
+  Xlib,
+  // Wayland,
+}
+
+impl From<PresentSupport> for Platform {
+  fn from(present_support: PresentSupport) -> Self {
+    match present_support {
+      PresentSupport::Win32 => Platform::Win32,
+      PresentSupport::Xcb { .. } => Platform::Xcb,
+      PresentSupport::Xlib { .. } => Platform::Xlib,
+      // PresentSupport::Wayland { .. } => Platform::Wayland,
+    }
+  }
+}
+
+pub trait HasWindowHandleExt: HasWindowHandle + HasDisplayHandle {
+  fn platform(&self) -> crate::Result<crate::Platform> {
+    use crate::Platform as P;
+    use RawWindowHandle as R;
+
+    let window_handle = self
+      .window_handle()
+      .map_err(|err| err.to_string())?
+      .as_raw();
+
+    Ok(match window_handle {
+      R::Win32(_) => P::Win32,
+      // R::Wayland(_) => P::Wayland,
+      R::Xcb(_) => P::Xcb,
+      R::Xlib(_) => P::Xlib,
+      _ => {
+        return Err(
+          format!("Platform: {window_handle:?} not supported").into(),
+        )
+      },
+    })
+  }
+}
+impl<W> HasWindowHandleExt for W where W: HasWindowHandle + HasDisplayHandle {}
+
+pub trait HasDisplayHandleExt: HasDisplayHandle {
+  fn platform(&self) -> crate::Result<crate::Platform> {
+    use crate::Platform as P;
+    use RawDisplayHandle as R;
+
+    let display_handle = self.display_handle()?.as_raw();
+
+    Ok(match display_handle {
+      R::Windows(_) => P::Win32,
+      // R::Wayland(_) => P::Wayland,
+      R::Xcb(_) => P::Xcb,
+      R::Xlib(_) => P::Xlib,
+      _ => {
+        return Err(
+          format!("Platform: {display_handle:?} not supported").into(),
+        )
+      },
+    })
+  }
+}
+impl<D> HasDisplayHandleExt for D where D: HasDisplayHandle {}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum PresentSupport {
-  #[default]
-  None,
   Win32,
   Xcb {
     connection: NonNull<c_void>,
@@ -26,36 +87,14 @@ pub enum PresentSupport {
     display: NonNull<c_void>,
     visual_id: c_ulong,
   },
-  Wayland,
-}
-
-impl From<Option<PresentSupport>> for PresentSupport {
-  fn from(option: Option<PresentSupport>) -> PresentSupport {
-    if let Some(present_support) = option {
-      present_support
-    } else {
-      PresentSupport::None
-    }
-  }
+  // Wayland,
 }
 
 impl PresentSupport {
-  pub fn into_option(
-    present_support: PresentSupport,
-  ) -> Option<PresentSupport> {
-    if let PresentSupport::None = present_support {
-      None
-    } else {
-      Some(present_support)
-    }
-  }
-}
-
-pub trait PresentSupportFromRawWindowHandle {
-  fn from_window(
-    window: &impl HasDisplayAndWindowHandle,
+  pub fn from_window(
+    window: &impl HasWindowHandleExt,
   ) -> Result<PresentSupport> {
-    let platform = window.platform()?;
+    let platform = HasWindowHandleExt::platform(window)?;
     let window_handle = window
       .window_handle()
       .map_err(|_| "window handle not available or unsupported")?
@@ -106,11 +145,13 @@ pub trait PresentSupportFromRawWindowHandle {
         display: xlib_display.unwrap(),
         visual_id: xlib_visual_id.unwrap(),
       },
-      _ => return Err(format!("unsupported platform: {platform:?}").into()),
+      // _ => return Err(format!("unsupported platform: {platform:?}").into()),
     })
   }
 
-  fn from_display(display: &impl HasDisplayHandle) -> Result<PresentSupport> {
+  pub fn from_display(
+    display: &impl HasDisplayHandle,
+  ) -> Result<PresentSupport> {
     let platform = display.platform()?;
     let display_handle = display.display_handle()?.as_raw();
 
@@ -174,4 +215,3 @@ pub trait PresentSupportFromRawWindowHandle {
     }
   }
 }
-impl PresentSupportFromRawWindowHandle for PresentSupport {}

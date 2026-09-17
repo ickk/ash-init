@@ -61,9 +61,9 @@ fn main() {
             ..QueueCapabilities::default()
           },
           #[cfg(target_os = "windows")]
-          present_support: PresentSupport::Win32,
+          present_support: Some(PresentSupport::Win32),
           #[cfg(target_os = "linux")]
-          present_support: PresentSupport::None,
+          present_support: None,
           ..QueueRequirements::default()
         },
         QueueRequirements {

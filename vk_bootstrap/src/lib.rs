@@ -1,7 +1,5 @@
 mod error;
-mod platform;
 mod present_support;
-mod raw_window_handle;
 mod version;
 
 // VkContext stuff
@@ -33,15 +31,16 @@ pub use {
     error::{Error, ErrorList, Result},
     image::Image,
     instance_requirements::{InstanceExtensions, InstanceRequirements},
-    platform::Platform,
-    present_support::{PresentSupport, PresentSupportFromRawWindowHandle},
+    present_support::{
+      HasDisplayHandleExt, HasWindowHandleExt, Platform, PresentSupport,
+    },
     queue::Queue,
     shader_module::ShaderModule,
     surface::Surface,
     surface_ref::SurfaceRef,
     swapchain::Swapchain,
     swapchain_frame::SwapchainFrame,
-    version::{StrVersion, Version, VersionToVk},
+    version::Version,
     vk_context::VkContext,
   },
   ::ash::{self, vk, Device},
