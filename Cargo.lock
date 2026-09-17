@@ -12,6 +12,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "ash-init"
+version = "0.0.0"
+dependencies = [
+ "ash",
+ "raw-window-handle",
+ "tracing",
+ "x11",
+ "xcb",
+]
+
+[[package]]
 name = "bitflags"
 version = "2.13.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -87,17 +98,6 @@ name = "tracing-core"
 version = "0.1.36"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "db97caf9d906fbde555dd62fa95ddba9eecfd14cb388e4f491a66d74cd5fb79a"
-
-[[package]]
-name = "vk_bootstrap"
-version = "0.0.0"
-dependencies = [
- "ash",
- "raw-window-handle",
- "tracing",
- "x11",
- "xcb",
-]
 
 [[package]]
 name = "windows-link"

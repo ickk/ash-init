@@ -1,5 +1,5 @@
-`vk_bootstrap`
-==============
+`ash-init`
+==========
 
 Vulkan Instance & Device bootstrapping
 
@@ -11,5 +11,5 @@ renderer.
   expects `InstanceRequirements`, and after it has been created you may pass
   `DeviceRequirements` to created a logical device.
 
-- `DeviceContext` is a lot more opionated, it also deals with types for
+- `DeviceContext` is a lot more opinionated, it also deals with types for
   `Surface`, `Swapchain`, `Image`, &c.

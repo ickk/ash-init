@@ -1,16 +1,10 @@
 [workspace]
 resolver = "2"
-members = ["vk_bootstrap"]
+members = ["ash-init"]
 
 [workspace.dependencies]
-vk_bootstrap.path = "./vk_bootstrap"
-
-# foreign deps
 ash = { version = "0.38", default-features = false }
-itertools = { version = "0.12", default-features = false }
-log = { version = "0.4", default-features = false }
 raw-window-handle = { version = "0.6", default-features = false }
-tinyvec = { version = "1.6", default-features = false }
 tracing = { version = "0.1", default-features = false }
 tracing-subscriber = { version = "0.3", default-features = false }
 winit = { version = "0.30", default-features = false }

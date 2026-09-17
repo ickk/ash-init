@@ -1,5 +1,5 @@
 [package]
-name = "vk_bootstrap"
+name = "ash-init"
 version = "0.0.0"
 edition = "2021"
 description = "Vulkan Instance & Device bootstrapping"
