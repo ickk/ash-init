@@ -2,7 +2,7 @@
 
 use {
   crate::{
-    debug::{debug_callback::debug_callback_ffi, DebugCallback},
+    debug_callback::{debug_callback_ffi, DebugCallback},
     macros::delegate,
     DeviceRequirements, Features, InstanceRequirements, PresentSupport, Queue,
     QueueRequirements, Version,

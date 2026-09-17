@@ -2,7 +2,7 @@
 
 use {
   crate::{
-    debug::Object, DeviceRequirements, ErrorList, Queue, Result, VkContext,
+    debug_callback::Object, DeviceRequirements, ErrorList, Queue, Result, VkContext,
   },
   ::ash::{ext, vk, Device, Instance},
   ::core::fmt,

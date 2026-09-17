@@ -1,7 +1,7 @@
 // © ickk 2023-2026, All Rights Reserved.
 
 use {
-  crate::debug::{CallbackData, DebugCallback},
+  crate::debug_callback::{CallbackData, DebugCallback},
   ::ash::vk,
 };
 

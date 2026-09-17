@@ -1,7 +1,7 @@
 // © ickk 2023-2026, All Rights Reserved.
 
 use {
-  crate::debug::*,
+  crate::debug_callback::*,
   ::ash::vk,
   ::core::{cell::RefCell, fmt::Write as _},
 };
@@ -164,13 +164,13 @@ impl<const ENABLE_COLOR: bool> DebugCallback
 
       use vk::DebugUtilsMessageSeverityFlagsEXT as SeverityFlags;
       if message_severity.contains(SeverityFlags::ERROR) {
-        tracing::error!(target: "Vulkan", "{output}");
+        ::tracing::error!(target: "Vulkan", "{output}");
       } else if message_severity.contains(SeverityFlags::WARNING) {
-        tracing::warn!(target: "Vulkan", "{output}");
+        ::tracing::warn!(target: "Vulkan", "{output}");
       } else if message_severity.contains(SeverityFlags::INFO) {
-        tracing::info!(target: "Vulkan", "{output}");
+        ::tracing::info!(target: "Vulkan", "{output}");
       } else {
-        tracing::debug!(target: "Vulkan", "{output}");
+        ::tracing::debug!(target: "Vulkan", "{output}");
       }
     });
   }

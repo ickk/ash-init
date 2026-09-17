@@ -1,6 +1,6 @@
 // © ickk 2023-2026, All Rights Reserved.
 
-pub mod debug;
+pub mod debug_callback;
 mod device_requirements;
 mod error;
 mod instance_requirements;

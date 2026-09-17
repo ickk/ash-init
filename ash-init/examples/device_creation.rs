@@ -1,6 +1,6 @@
 use ::ash_init::{
-  debug::{
-    callbacks::TracingDebugCallback, MessageSeverityFlags, MessageTypeFlags,
+  debug_callback::{
+    MessageSeverityFlags, MessageTypeFlags, TracingDebugCallback,
   },
   DeviceExtensions, DeviceRequirements, Features, InstanceExtensions,
   InstanceRequirements, PresentSupport, QueueCapabilities, QueueRequirements,
